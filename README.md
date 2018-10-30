@@ -8,19 +8,22 @@ This is a Docker image that combines multiple open source tools that can be used
 * Snyk
 
 # Build Docker image
-In order to use Snyk, you need to authenticate with the server during the build. Set an environment variable with you Snyk API token, so we can use it during the build:
 ```
-read api_token
-```
-Input the API token that you can find on the settings page on skyk.io. Now build the image.
-```
-docker build -t sca --build-arg snyk_auth=$api_token .
+docker build -t sca .
 ```
 
 # Run Docker image
-To run the image, we need to mount a project directory into it, that we want to scan.
+To run the image, we need to mount a project directory into it, that we want to scan. Furthermore, you need to authenticate snyk with an API key. 
+You can get the API key by registering on snyk.io. Create a file called snyk.json inside a directory snyk_config with the following content:
 ```
-docker run -it -v <path_to_project>:/scan sca
+{
+	"api": "<your_api_token>"
+}
+```
+We will mount this file into our Docker container, so you can use snyk without ever having to run `snyk auth`.
+Run the container with the following command:
+```
+docker run -it -v <path_to_project>:/scan -v <path_to_snyk_config>:/root/.config/configstore sca
 ```
 
 # Tools for node.js and maven projects 

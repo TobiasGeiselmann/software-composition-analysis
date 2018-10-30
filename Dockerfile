@@ -11,8 +11,6 @@ RUN npm install auditjs -g
 
 # Install snyk
 RUN npm install -g snyk
-ARG snyk_auth
-RUN snyk auth ${snyk_auth}
 
 # Install patch as snyk needs it to apply patches for vulnerabilities
 RUN apt-get update && apt-get install -y patch
