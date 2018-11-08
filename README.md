@@ -26,6 +26,9 @@ Run the container with the following command:
 docker run -it -v <path_to_project>:/scan -v <path_to_snyk_config>:/root/.config/configstore sca
 ```
 
+# Running the tools
+For simplicity reasons, I included two shell scripts, that perform the corresponding checks for node.js and maven projects. 
+
 # Tools for node.js and maven projects 
 
 ## Run dependency-check
